@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.IntStream;
 
 public class Point {
 	private ArrayList<Point> neighbors;
@@ -25,8 +27,18 @@ public class Point {
 	}
 
 	public void calculateNewState() {
-		//TODO: insert logic which updates according to currentState and 
+		//TODO: insert logic which updates according to currentState and
 		//number of active neighbors
+		int activeNeighbors = activeNeighbors();
+		if(currentState == 1 && intIn(activeNeighbors, 2,3))
+			nextState = 1;
+		else if(currentState == 0 && intIn(activeNeighbors, 3))
+			nextState = 1;
+		else nextState = 0;
+	}
+
+	private boolean intIn(int toCompare, int... values) {
+		return Arrays.stream(values).anyMatch(x -> x==toCompare);
 	}
 
 	public void changeState() {
@@ -38,4 +50,7 @@ public class Point {
 	}
 	
 	//TODO: write method counting all active neighbors of THIS point
+	public int activeNeighbors() {
+		return Math.toIntExact(neighbors.stream().filter(x -> x.getState() == 1).count());
+	}
 }

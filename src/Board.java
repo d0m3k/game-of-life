@@ -56,7 +56,13 @@ public class Board extends JComponent implements MouseInputListener, ComponentLi
 
 		for (int x = 0; x < points.length; ++x) {
 			for (int y = 0; y < points[x].length; ++y) {
-				//TODO: initialize the neighborhood of points[x][y] cell 
+				//TODO: initialize the neighborhood of points[x][y] cell
+				for(int i=x-1; i>=0 && i<=x+1 && i<points.length ;i++) {
+					for(int j=y-1; j>=0 && j<=y+1 && j<points[x].length; j++) {
+						if (!(i==x && j==y))
+							points[x][y].addNeighbor(points[i][j]);
+					}
+				}
 			}
 		}
 	}
