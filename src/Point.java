@@ -30,10 +30,10 @@ public class Point {
 		//TODO: insert logic which updates according to currentState and
 		//number of active neighbors
 		int activeNeighbors = activeNeighbors();
-		if(currentState == 1 && intIn(activeNeighbors, 2,3))
-			nextState = 1;
-		else if(currentState == 0 && intIn(activeNeighbors, 3))
-			nextState = 1;
+		if(currentState >= 1 && intIn(activeNeighbors, 1,2,3,4,5,6))
+			nextState = activeNeighbors;
+		else if(currentState == 0 && intIn(activeNeighbors, 1,2,3,4,5,6))
+			nextState = activeNeighbors;
 		else nextState = 0;
 	}
 
@@ -51,6 +51,6 @@ public class Point {
 	
 	//TODO: write method counting all active neighbors of THIS point
 	public int activeNeighbors() {
-		return Math.toIntExact(neighbors.stream().filter(x -> x.getState() == 1).count());
+		return Math.toIntExact(neighbors.stream().filter(x -> x.getState() >= 1).count());
 	}
 }
